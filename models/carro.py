@@ -1,14 +1,15 @@
 from flask import Blueprint
 from flask import render_template, request
-from .models import Carro
 from database import db
+from .models import Carro
+
 
 bp_carro = Blueprint("carro", __name__, template_folder="templates")
 
 @bp_carro.route('/create', methods=['GET', 'POST'])
 def create():
     if request.method=='GET':
-        return render_template('carro_form.html')
+        return render_template('form/carro_form.html')
 
     if request.method=='POST':
         marca = request.form.get('marca')
@@ -20,7 +21,7 @@ def create():
         db.session.add(query)
         db.session.commit()
 
-    return render_template('carro_form.html')
+    return render_template('index.html')
 
 @bp_carro.route('/')
 def recovery():
@@ -46,6 +47,8 @@ def update(id):
         
         db.session.add(c)
         db.session.commit()
+        
+    return render_template('index.html')
 
 @bp_carro.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):

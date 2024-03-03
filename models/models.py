@@ -18,11 +18,9 @@ class Funcionario(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String, nullable=False)
     funcao = db.Column(db.String, nullable=False)
-    username = db.Column(db.String(140))
-    password = db.Column(db.String(512))
-    def __init__(self, nome, placa, funcao):
+
+    def __init__(self, nome, funcao):
         self.nome = nome
-        self.placa = placa
         self.funcao = funcao
 
 class Cliente(db.Model, SerializerMixin):
@@ -30,14 +28,14 @@ class Cliente(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String, nullable=False)
     id_carro = db.Column(db.String, db.ForeignKey('carro.id'))
-    username = db.Column(db.String(140))
-    password = db.Column(db.String(512))
+    endereco = db.Column(db.String, nullable=False)
+    telefone = db.Column(db.String, nullable=False)
     
-    def __init__(self, nome, placa, id_carro):
+    def __init__(self, nome, id_carro, endereco, telefone):
         self.nome = nome
-        self.placa = placa
         self.id_carro = id_carro
-    
+        self.endereco = endereco
+        self.telefone = telefone
 
 class Servico(db.Model, SerializerMixin):
     __tablename__="servico"
@@ -48,9 +46,7 @@ class Servico(db.Model, SerializerMixin):
     id_Cliente = db.Column(db.Integer, db.ForeignKey('cliente.id'))
     data = db.Column(db.Date)
     status = db.Column(Integer, nullable=False)
-    username = db.Column(db.String(140))
-    password = db.Column(db.String(512))
-    
+
     def __init__(self, descricao, id_carro, id_funcionario, id_cliente, data, status):
         self.descricao = descricao
         self.id_carro = id_carro

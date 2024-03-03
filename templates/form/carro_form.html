@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Carro form{% endblock %}
+
+{% block head %}
+{% endblock %}
+{% block content %}
+    <div class="container-sm">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Marca</label>
+                <input type="text" name="marca" class="form-control"  aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label>Placa</label>
+                <input type="text" name="placa" class="form-control" placeholder="Placa">
+            </div>
+            <div class="form-group">
+                <label>Modelo</label>
+                <input type="text" name="modelo" class="form-control" placeholder="Modelo">
+                </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+{% endblock %}
+{% block footer%}
+{% endblock %}
