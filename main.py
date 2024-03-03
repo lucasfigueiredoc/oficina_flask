@@ -1,11 +1,11 @@
 from flask import Flask, render_template
-from database import db
+from .database import db
 from flask_migrate import Migrate
 from flask_bootstrap import Bootstrap
-from models.cliente import bp_cliente
-from models.funcionario import bp_funcionario
-from models.servico import bp_servico
-from models.carro import bp_carro
+from .ext.model.models import bp_cliente, Cliente
+from .ext.model.models import bp_funcionario, Funcionario
+from .ext.model.models import bp_servico, Servico
+from .ext.model.models import bp_carro, Carro
 
 app = Flask(__name__)
 
@@ -28,7 +28,8 @@ Bootstrap(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    values = Servico.query.join(Funcionario).join(Carro).join(Cliente).all()
+    return render_template('index.html', values=values)
 
 if __name__ == "__main__":
     app.run(debug=True)

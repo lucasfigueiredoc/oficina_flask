@@ -1,15 +1,14 @@
 {% extends "base.html" %}
-{% block title %}Index{% endblock %}
+{% block title %}Listagem{% endblock %}
 
 {% block head %}
 {% endblock %}
 {% block content %}
     <ul>
         {% for value in values %}
-            <li>{{ h }}</li>
+            <li>{{ value }}</li>
         {% endfor %}
     </ul>
-    test
 {% endblock %}
 {% block footer%}
 {% endblock %}
