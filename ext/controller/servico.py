@@ -8,7 +8,7 @@ bp_servico = Blueprint("servico", __name__, template_folder="templates")
 
 @bp_servico.route('/')
 def recovery():
-    servico = servico.query.all()
+    servico = Servico.query.all()
     return render_template('list.html', value=servico)
 
 @bp_servico.route('/create', methods=['GET', 'POST'])

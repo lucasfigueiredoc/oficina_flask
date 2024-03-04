@@ -5,7 +5,6 @@ from ..form.carroForm import CarroForm
 from ..models import Carro
 
 bp_carro = Blueprint("carro", __name__, template_folder="templates")
-carros = Carro.query.all()
 @bp_carro.route('/')
 def recovery():
     carros = Carro.query.all()
@@ -13,7 +12,7 @@ def recovery():
 
 @bp_carro.route('/create', methods=['GET', 'POST'])
 def create():
-
+    carros = Carro.query.all()
     form = CarroForm()
     if request.method == 'GET':
         return render_template('form/carro_form.html', form=form)

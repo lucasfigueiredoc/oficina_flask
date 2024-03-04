@@ -5,7 +5,7 @@ from ..models import Funcionario
 from ...database import db
 
 bp_funcionario = Blueprint("funcionario", __name__, template_folder="templates")
-funcionario = Funcionario.query.all()
+
 @bp_funcionario.route('/')
 def recovery():
     funcionario = Funcionario.query.all()

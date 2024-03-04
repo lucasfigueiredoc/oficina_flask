@@ -10,7 +10,6 @@ bp_cliente = Blueprint("cliente", __name__, template_folder="templates")
 @bp_cliente.route('/')
 def recovery():
     cliente = Cliente.query.join(Carro).all()
-    
     return render_template('list/list_cliente.html', values=cliente)
 
 @bp_cliente.route('/create', methods=['GET', 'POST'])
