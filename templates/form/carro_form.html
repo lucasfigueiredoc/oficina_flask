@@ -4,25 +4,31 @@
 {% block head %}
 {% endblock %}
 {% block content %}
-    <div class="container">
-        <form method="post">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center">Criar Novo Carro</h2>
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.marca.label(class="form-label") }}
+                        {{ form.marca(class="form-control") }}
+                    </div>
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">Marca</label>
-                <input type="text" name="marca" class="form-control"  placeholder="Marca">
-            </div>
-            <div class="form-group">
-                <label>Placa</label>
-                <input type="text" name="placa" class="form-control" placeholder="Placa">
-            </div>
-            <div class="form-group">
-                <label>Modelo</label>
-                <input type="text" name="modelo" class="form-control" placeholder="Modelo">
-            </div>
+                    <div class="form-group">
+                        {{ form.placa.label(class="form-label") }}
+                        {{ form.placa(class="form-control") }}
+                    </div>
 
-            <input type="submit" value="Cadastrar" class="btn btn-primary">Enviar</input>
-        </form>
+                    <div class="form-group">
+                        {{ form.modelo.label(class="form-label") }}
+                        {{ form.modelo(class="form-control") }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Criar Carro</button>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}
-{% block footer%}
+{% block footer %}
 {% endblock %}

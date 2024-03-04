@@ -2,15 +2,19 @@ from flask import Flask, render_template
 from .database import db
 from flask_migrate import Migrate
 from flask_bootstrap import Bootstrap
-from .ext.model.models import bp_cliente, Cliente
-from .ext.model.models import bp_funcionario, Funcionario
-from .ext.model.models import bp_servico, Servico
-from .ext.model.models import bp_carro, Carro
+from .ext.models import Cliente
+from .ext.models import Funcionario
+from .ext.models import Servico
+from .ext.models import Carro
+from .ext.controller.carro import bp_carro
+from .ext.controller.funcionario import bp_funcionario
+from .ext.controller.servico import bp_servico
+from .ext.controller.cliente import bp_cliente
 
 app = Flask(__name__)
 
 # Database
-connect =  "sqlite:///oficina.sqlite"
+connect =  "sqlite:///a.sqlite"
 app.config['SECRET_KEY'] = 'root'
 app.config['SQLALCHEMY_DATABASE_URI'] = connect
 app.config['SQLALCHEMY_TRACKMODIFICATIONS'] = False

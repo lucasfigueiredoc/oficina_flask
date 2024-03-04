@@ -1,49 +1,50 @@
 from flask import Blueprint
 from flask import render_template, request
-from database import db
-from .models import Funcionario
+from ..form.funcionarioForm import FuncionarioForm
+from ..models import Funcionario
+from ...database import db
 
 bp_funcionario = Blueprint("funcionario", __name__, template_folder="templates")
+funcionario = Funcionario.query.all()
+@bp_funcionario.route('/')
+def recovery():
+    funcionario = Funcionario.query.all()
+    return render_template('list/list_funcionario.html', values=funcionario)
 
 @bp_funcionario.route('/create', methods=['GET', 'POST'])
 def create():
+    funcionario = Funcionario.query.all()
+    form = FuncionarioForm()
     if request.method=='GET':
-        return render_template('form/funcionario_form.html')
+        return render_template('form/funcionario_form.html', form=form)
 
-    if request.method=='POST':
-        nome = request.form.get('nome')
-        funcao = request.form.get('funcao')
+    if form.validate_on_submit():
+        nome = form.nome.data
+        funcao = form.funcao.data
         
-        query = Funcionario(nome,funcao)
+        novo_funcionario = Funcionario(nome=nome, funcao=funcao)
         
-        db.session.add(query)
+        db.session.add(novo_funcionario)
         db.session.commit()
-
         
-    return render_template('form/funcionario.html')
+        return render_template('list/list_funcionario.html', values=funcionario)
 
-
-@bp_funcionario.route('/')
-def recovery():
-    funcionario = funcionario.query.all()
-    return render_template('list.html', value=funcionario)
+    return render_template('list/list_funcionario.html', values=funcionario)
 
 @bp_funcionario.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
+    funcionario = Funcionario.query.all()
     f = Funcionario.query.get(id)
+    form = FuncionarioForm(obj=f)
     if request.method=='GET':
-
-        return render_template('form/funcionario_form.html', value=f)
+        form.populate_obj(f)
+        return render_template('form/funcionario_form.html', form=form)
     
-    if request.method=='POST':
-        nome = request.form.get('nome')
-        funcao = request.form.get('funcao')
-        f.nome = nome
-        f.funcao = funcao
-        
-        db.session.add(f)
+    if form.validate_on_submit():
+        form.populate_obj(f)
         db.session.commit()
-        
+        return render_template('list/list_funcionario.html', values=funcionario)
+    return render_template('list/list_funcionario.html', values=funcionario)
         
 @bp_funcionario.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):
@@ -53,5 +54,3 @@ def delete(id):
     if request.method=='POST':
         db.session.delete(f)
         db.session.commit()
-
-
