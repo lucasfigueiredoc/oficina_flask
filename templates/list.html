@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Listagem{% endblock %}
+
+{% block head %}
+{% endblock %}
+{% block content %}
+    <ul>
+        {% for value in values %}
+            <li>{{ value }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+{% block footer%}
+{% endblock %}

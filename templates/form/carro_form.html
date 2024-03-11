@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Carro form{% endblock %}
+
+{% block head %}
+{% endblock %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center">Carro</h2>
+                <div class="card">
+                    <div class="card-body">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.marca.label(class="form-label") }}
+                        {{ form.marca(class="form-control") }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.placa.label(class="form-label") }}
+                        {{ form.placa(class="form-control") }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.modelo.label(class="form-label") }}
+                        {{ form.modelo(class="form-control") }}
+                    </div>
+                </div>
+                </div>
+                    <div class="card">
+                        <div class="card-body">
+                    <button type="submit" class="btn btn-primary btn-block">Criar Carro</button>
+                        </div>
+                    </div>
+                
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+{% endblock %}

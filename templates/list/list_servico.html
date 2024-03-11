@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Listagem{% endblock %}
+
+{% block head %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="m-0">Funcionários</h4>
+                </div>
+                <table class="table table-striped table-light table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="row"></th>
+                            <th scope="col">Modelo do Carro</th>
+                            <th scope="col">Responsável</th>
+                            <th scope="col">Placa</th>
+                            <th scope="col">Entrada</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for value, carro, funcionario in servicos %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ carro.modelo if carro else 'N/A' }}</td>
+                            <td>{{ funcionario.nome if funcionario else 'N/A' }}</td>
+                            <td>{{ carro.placa if carro else 'N/A' }}</td>
+                            <td>{{ value.data }}</td>
+                            <td>{{ value.status if value.status == 1 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block footer%}
+{% endblock %}
