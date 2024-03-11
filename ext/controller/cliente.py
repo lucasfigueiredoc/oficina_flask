@@ -7,9 +7,9 @@ from ...database import db
 
 bp_cliente = Blueprint("cliente", __name__, template_folder="templates")
 
-@bp_cliente.route('/')
+@bp_cliente.route('/', endpoint="cliente")
 def recovery():
-    cliente = Cliente.query.join(Carro).all()
+    cliente = Cliente.query.all()
     return render_template('list/list_cliente.html', values=cliente)
 
 @bp_cliente.route('/create', methods=['GET', 'POST'])

@@ -2,10 +2,11 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from ...database import db
 from ..form.carroForm import CarroForm
+from ..form.clienteForm import ClienteForm
 from ..models import Carro
 
 bp_carro = Blueprint("carro", __name__, template_folder="templates")
-@bp_carro.route('/')
+@bp_carro.route('/', endpoint="carro")
 def recovery():
     carros = Carro.query.all()
     return render_template('list/list_carro.html', values=carros)
@@ -16,7 +17,8 @@ def create():
     form = CarroForm()
     if request.method == 'GET':
         return render_template('form/carro_form.html', form=form)
-
+    formC = ClienteForm()
+    formC.set_choices()
     if form.validate_on_submit():
         novo_carro = Carro(
             marca=form.marca.data,
@@ -26,7 +28,7 @@ def create():
 
         db.session.add(novo_carro)
         db.session.commit()
-        return render_template('list/list_carro.html', values=carros)
+        return render_template('form/cliente_form.html', form=formC)
 
     return render_template('list/list_carro.html', values=carros)
 

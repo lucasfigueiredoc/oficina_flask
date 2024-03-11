@@ -31,9 +31,21 @@ app.register_blueprint(bp_servico, url_prefix='/servico')
 Bootstrap(app)
 
 @app.route('/')
-def index():
-    values = Servico.query.join(Funcionario).join(Carro).join(Cliente).all()
-    return render_template('index.html', values=values)
+def home():
+    valuesStatus1 = db.session.query(Servico, Carro, Funcionario).\
+        join(Carro, Servico.id_carro == Carro.id, isouter=True).\
+        join(Funcionario, Servico.id_funcionario == Funcionario.id, isouter=True).\
+        filter(Servico.status==1).\
+        all()
+    valuesStatus2 = db.session.query(Servico, Carro, Funcionario).\
+        join(Carro, Servico.id_carro == Carro.id, isouter=True).\
+        join(Funcionario, Servico.id_funcionario == Funcionario.id, isouter=True).\
+        filter(Servico.status==2).\
+        all()
+        
+    return render_template('index.html', valuesStatus1=valuesStatus1,valuesStatus2=valuesStatus2)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+#if __name__ == "__main__":
+#    app.run(debug=True)
+
+app.run()

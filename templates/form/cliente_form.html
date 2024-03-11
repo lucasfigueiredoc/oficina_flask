@@ -8,7 +8,9 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-    <h2>Criar Cliente</h2>
+    <h2>Cliente</h2>
+    <div class="card">
+        <div class="card-body">
     <form method="POST">
         {{ form.hidden_tag() }}
         <div class="form-group">
@@ -30,8 +32,14 @@
             {{ form.telefone.label(class="form-label") }}
             {{ form.telefone(class="form-control") }}
         </div>
+    </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
 
         <button type="submit" class="btn btn-primary">Criar Cliente</button>
+        </div>
+    </div>
     </form>
 </div>
 </div>
